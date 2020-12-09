@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  todo-web-application:
+    image: alejajessi/todo-web-application-mysql:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+     RDS_HOSTNAME: mysql
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - ".:/app:rw"
+      - "./data:/data:rw"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dummypassword
+      MYSQL_USER: todos-user
+      MYSQL_PASSWORD: dummytodos
+      MYSQL_DATABASE: todos
