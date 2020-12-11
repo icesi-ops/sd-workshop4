@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   todo-web-application:  
-    image: icesiops/todo-web-application-mysql:0.0.1-SNAPSHOT
+    image: sebastesla1/todo-web-application-mysql:1.0
     ports:
      - "8080:8080"
     restart: always
