@@ -1,0 +1,51 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+
+version: '3.7'
+
+
+
+# Define services
+services:
+
+  # Database Service (Mysql)
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: todos
+      MYSQL_USER: todos-user
+      MYSQL_PASSWORD: dummytodos
+      MYSQL_ROOT_PASSWORD: dummypassword
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - backend  
+
+
+  # App backend service
+  backend-service:
+    # Configuration for building the docker image for the backend service
+    build:
+      context: 04_springboot_app # Use an image built from the specified dockerfile in the `polling-app-server` directory.
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    restart: always
+    environment:
+      RDS_HOSTNAME: mysql
+    depends_on: 
+      - mysql # This service depends on mysql. Start that first.
+
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
+
+  
+# Volumes
+volumes:
+  db-data:
+
+# Networks to be created to facilitate communication between containers
+networks:
+  backend:
