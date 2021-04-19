@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  workshop4:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - 8080:8080
+    networks:
+      - lanetworkso
+    environment:
+      RDS_HOSTNAME: distribuidos
+      RDS_PORT: 3306
+      RDS_DB_NAME: todos
+      RDS_USERNAME: todos-user
+      RDS_PASSWORD: dummytodos
+    depends_on:
+      - distribuidos 
+    
+  distribuidos:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    networks:
+      - lanetworkso
+      
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: dummypassword 
+      MYSQL_USER: todos-user
+      MYSQL_PASSWORD: dummytodos
+      MYSQL_DATABASE: todos
+networks:
+  lanetworkso:
