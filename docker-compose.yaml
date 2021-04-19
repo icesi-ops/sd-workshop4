@@ -1,0 +1,34 @@
+version: '3.7'
+services:
+
+  mysql:
+    image: mysql:5.7
+    ports:
+     - "3306:3306"
+    networks:
+     - net-application
+    environment:
+   #  MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: dummypassword 
+      MYSQL_USER: todos-user
+      MYSQL_PASSWORD: dummytodos
+      MYSQL_DATABASE: todos
+   
+  dockerrun: 
+      build: ./04_springboot_app
+      ports:
+       - "8080:8080"
+      networks:
+       - net-application
+      depends_on:
+       - mysql
+      environment:
+       RDS_HOSTNAME: mysql
+       RDS_PORT: 3306
+       RDS_DB_NAME: todos
+       RDS_USERNAME: todos-user
+       RDS_PASSWORD: dummytodos
+  
+networks:
+ net-application: 
+ 
