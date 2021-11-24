@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mypyapp
+  labels:
+    app: mypyapp
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: mypyapp
+  template:
+    metadata:
+      labels:
+        app: mypyapp
+    spec:
+      containers:
+      - name: mypyapp
+        image: mypyapp:local
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000

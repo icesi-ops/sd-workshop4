@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: app-python
+  name: mypyapp
   labels:
     project: workshop4
     service: web
@@ -9,6 +9,8 @@ metadata:
     app: mypyapp
 spec:
   containers:
-  - name: app
+  - name: mypyapp 
     image: mypyapp:local
     imagePullPolicy: Never
+    ports:
+      - containerPort: 8000
