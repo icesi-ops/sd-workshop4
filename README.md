@@ -34,7 +34,7 @@ docker build -t w4-app-config ./app-config
 docker build -t w4-app-invoice ./app-invoice
 docker build -t w4-app-pay ./app-pay
 docker build -t w4-app-transaction ./app-transaction
-docker build -t w4-haproxy ./haproxy
+docker build -t loadbalancer ./haproxy
 
 
 docker run  -p 5432:5432 \
@@ -102,6 +102,14 @@ docker run  -p 8500:8500 \
             consul:latest \
             agent -server -bootstrap-expect 1 -ui -data-dir /tmp -client=0.0.0.0
 
+# Load balacner
+docker run  -p 80:8080\
+            -p 1936:1936 \
+            --network distribuidos \
+            --name loadbalancer \
+            -d \
+            loadbalancer
+
 # Application gateway
 docker run  -p 6379:6379\
             -d\
@@ -123,6 +131,6 @@ docker exec -it express-gateway sh
 eg users create
 # in redirection uri pass the following: http://localhost:8080/config/app-pay/dev 
 eg credentials create -c sebas -t key-auth -q
-# 5PYUV8nlx1bbOEZNZfiVke:7mlK5MlB4KqJREK980bEeL
+# Copy 5PYUV8nlx1bbOEZNZfiVke:7mlK5MlB4KqJREK980bEeL
 curl -H "Authorization: apiKey 5PYUV8nlx1bbOEZNZfiVke:7mlK5MlB4KqJREK980bEeL" http://localhost:8080/config/app-pay/dev
 ```
