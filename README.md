@@ -111,9 +111,9 @@ docker run  -p 6379:6379\
 
 # Express gateway
 cd appgw
-docker run  -p 8080:8080\
-            -p 9876:9876\
-            -v /var/lib/eg\
+docker run  -p 8080:8080 \
+            -p 9876:9876 \
+            -v $PWD:/var/lib/eg \
             -d \
             --network distribuidos\
             --name express-gateway\
@@ -121,7 +121,8 @@ docker run  -p 8080:8080\
 
 docker exec -it express-gateway sh
 eg users create
+# in redirection uri pass the following: http://localhost:8080/config/app-pay/dev 
 eg credentials create -c sebas -t key-auth -q
-# copy 3Wsu7SvsKmgolM5emyBVfC:5AbEjqe7uo2rHZzxSc7E0x
-
+# 5PYUV8nlx1bbOEZNZfiVke:7mlK5MlB4KqJREK980bEeL
+curl -H "Authorization: apiKey 5PYUV8nlx1bbOEZNZfiVke:7mlK5MlB4KqJREK980bEeL" http://localhost:8080/config/app-pay/dev
 ```
