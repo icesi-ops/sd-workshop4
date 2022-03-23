@@ -177,4 +177,4 @@ curl --location --request POST 'http://localhost:8010/pay/pay' \
 ![Consul running](evidences/consul_running.png)
 
 ## Get request through load balancer 
-![Get request through load balancer](evidences/get-request-success-app-pay.jpeg)
+![Get request through load balancer](evidences/get-request-success-app-pay.png)
