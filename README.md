@@ -1,3 +1,8 @@
+# Authors
+
+* Christian Gallo Peláez 
+
+* Sebastián García Acosta
 # Workshop4
 
 Integrate microservice app-pay to:
@@ -7,6 +12,11 @@ Integrate microservice app-pay to:
 
 till Martes 22/ 11:59pm 
 
+* We modified the sd-workshop4/training_microservices/pay-app-spring-microservices/app-config/src/main/resources/application.properties file to point to a GitHub repository that we created with the inclusion of the Consul configuration of the app-pay microservice
+
+* We added the apppay backend in the configuration of the HAproxy to point to the app-pay microservice under the localhost:8010/pay uri
+
+* We added the URI redirection request int he express-gateway when creating credentials
 # Get started
 
 ```bash
@@ -130,10 +140,25 @@ docker run  -p 8080:8080 \
 docker exec -it express-gateway sh
 eg users create
 # in redirection uri pass the following: http://localhost:8080/config/app-pay/dev 
+# http://localhost:8010/pay/pay
+
 eg credentials create -c sebas -t key-auth -q
-# Copy 5PYUV8nlx1bbOEZNZfiVke:7mlK5MlB4KqJREK980bEeL
-curl -H "Authorization: apiKey 5PYUV8nlx1bbOEZNZfiVke:7mlK5MlB4KqJREK980bEeL" http://localhost:8080/config/app-pay/dev
+# 7vvWs6lS9ADrIPRnTr9agT:4hJshXuCVf54KTrNSjmU1T
+
+# Make GET request to config microservice in order to test HAProxy backend configuration
+curl -H "Authorization: apiKey 7vvWs6lS9ADrIPRnTr9agT:4hJshXuCVf54KTrNSjmU1T" http://localhost:8080/config/app-pay/dev
+
+# Make POST request to pay microservice in order to test HAProxy backend configuration
+curl --location --request POST 'http://localhost:8010/pay/pay' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "idOperation": 2,
+    "idInvoice": 123,
+    "amount": 12.50,
+    "dateTime": "2021-05-21"
+}'
 ```
+
 # Evidences
 ## docker images building 
 ![docker images building](evidences/docker_images_building.jpeg)
