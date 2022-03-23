@@ -7,9 +7,14 @@ apiEndpoints:
   appconfig:
     host: localhost
     paths: ['/config','/config/*']
+  apppay:
+    host: localhost
+    paths: ['/apppay', '/apppay/*']
 serviceEndpoints:
   appconfig:
    url: 'http://loadbalancer/config/'
+  apppay:
+   url: 'http://loadbalancer/apppay'
 policies:
   - basic-auth
   - cors
@@ -23,12 +28,19 @@ pipelines:
   default:
     apiEndpoints:
       - appconfig
+      - apppay
     policies:
     # Uncomment `key-auth:` when instructed to in the Getting Started guide.
       - key-auth:
       - proxy:
           - action:
               serviceEndpoint: appconfig 
+              changeOrigin: true
+              prependPath:  false
+              ignorePath:   false
+              stripPath:    false
+          - action:
+              serviceEndpoint: apppay 
               changeOrigin: true
               prependPath:  false
               ignorePath:   false

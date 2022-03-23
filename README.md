@@ -147,18 +147,22 @@ docker run  -p 8080:8080 \
 
 docker exec -it express-gateway sh
 eg users create
+eg users create -p 'username=sebas' -p 'firstname=sebas' -p 'lastname=garcia'
 # in redirection uri pass the following: http://localhost:8080/config/app-pay/dev 
-# http://localhost:8010/pay/pay
+# http://localhost:8080/apppay/pay
 
 eg credentials create -c sebas -t key-auth -q
-# 7vvWs6lS9ADrIPRnTr9agT:4hJshXuCVf54KTrNSjmU1T
+# 2PsP3iMzRr1JEj4igeWluA:1degbDrMWjtKzneIHZPGK9
+
+exit
 
 # Make GET request to config microservice in order to test HAProxy backend configuration
-curl -H "Authorization: apiKey 7vvWs6lS9ADrIPRnTr9agT:4hJshXuCVf54KTrNSjmU1T" http://localhost:8080/config/app-pay/dev
+curl -H "Authorization: apiKey 2PsP3iMzRr1JEj4igeWluA:1degbDrMWjtKzneIHZPGK9" http://localhost:8080/config/app-pay/dev
 
 # Make POST request to pay microservice in order to test HAProxy backend configuration
-curl --location --request POST 'http://localhost:8010/pay/pay' \
+curl --location --request POST 'http://localhost:8080/apppay/pay' \
 --header 'Content-Type: application/json' \
+--header 'Authorization: apiKey 2PsP3iMzRr1JEj4igeWluA:1degbDrMWjtKzneIHZPGK9' \
 --data-raw '{
     "idOperation": 2,
     "idInvoice": 123,
