@@ -134,3 +134,14 @@ eg credentials create -c sebas -t key-auth -q
 # Copy 5PYUV8nlx1bbOEZNZfiVke:7mlK5MlB4KqJREK980bEeL
 curl -H "Authorization: apiKey 5PYUV8nlx1bbOEZNZfiVke:7mlK5MlB4KqJREK980bEeL" http://localhost:8080/config/app-pay/dev
 ```
+# Evidences
+## docker images building 
+![docker images building](evidences/docker_images_building.jpeg)
+## containers_running 
+![containers_running](evidences/containers_running.png)
+
+## Consul running 
+![Consul running](evidences/consul_running.png)
+
+## Get request through load balancer 
+![Get request through load balancer](evidences/get-request-success-app-pay.jpeg)
