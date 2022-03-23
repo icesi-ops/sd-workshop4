@@ -7,6 +7,7 @@ Integrate microservice app-pay to:
 ![Docker loadbalancer](loadbalancer.jpg "Docker loadbalancer")
 - Modify API GW to support redirect to app-pay microservice
 ![Docker apigw](apigw.jpg "Docker apigw")
+![Docker curl](curl.jpg "Docker curl")
 
 till Martes 22/ 11:59pm 
 
