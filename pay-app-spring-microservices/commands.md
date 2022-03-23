@@ -74,7 +74,7 @@ docker run --network distribuidos -d --name express-gateway-data-store \
 Run the command inside appgw directory o keep in mind change the volume path to pointing to gateway.config.yml
 docker run -d --name express-gateway \
     --network distribuidos \
-    -v .:/var/lib/eg \
+    -v $PWD:/var/lib/eg \
     -p 8080:8080 \
     -p 9876:9876 \
     express-gateway
@@ -89,10 +89,10 @@ eg users create
 6. assign auth key
 eg credentials create -c sebas -t key-auth -q
 
-7. copy key 3DvE2HCfZCyfgxAjF40tOk:2U4Cojm11JaPJF6WRUcFBL
+7. copy key 6SEbE4hl9wJ1HkrGgWxw5c:5KdF7HnGFHt6CejfFbEZWw
 
 8. Curl API endpoint as Sebas  with key credentials - SUCCESS!
 
 curl -H "Authorization: apiKey ${keyId}:${keySecret}" http://localhost:8080/config/app-pay/dev
 
-curl -H "Authorization: apiKey 3DvE2HCfZCyfgxAjF40tOk:2U4Cojm11JaPJF6WRUcFBL" http://localhost:8080/config/app-pay/dev
+curl -H "Authorization: apiKey 0hTEARfMg6Nlwd55WVvkYV:2J7aQO26amW4Qw0elAwMkI" http://localhost:8080/config/app-pay/dev
