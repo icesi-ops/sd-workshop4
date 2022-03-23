@@ -14,15 +14,23 @@ till Martes 22/ 11:59pm
 
 * We modified the sd-workshop4/training_microservices/pay-app-spring-microservices/app-config/src/main/resources/application.properties file to point to a GitHub repository that we created with the inclusion of the Consul configuration of the app-pay microservice
 
+```gradle
+spring.cloud.config.server.git.uri=https://github.com/SebasGarcia08/training_microservices.git
+```
+
 * We added the apppay backend in the configuration of the HAproxy to point to the app-pay microservice under the localhost:8010/pay uri
 
-* We added the URI redirection request int he express-gateway when creating credentials
+```
+backend pay_back
+    mode http
+    balance roundrobin
+    http-request set-path "%[path,regsub(^/pay/,/)]"
+    server apppay app-pay.service.consul:8010 resolvers consul resolve-prefer ipv4 check
+
+```
 # Get started
 
 ```bash
-git clone git@github.com:icesi-ops/training_microservices.git
-cd training_microservices
-git checkout 0f4bac8ca6ab86df2b9c61aaa7de81479398bf2d
 cd pay-app-spring-microservices
 
 # Create docker network
