@@ -6,4 +6,16 @@ Integrate microservice app-pay to:
 - Modify API GW to support redirect to app-pay microservice
 
 till Martes 22/ 11:59pm 
+-----------------------------------
+
+Entregaron a tiempo:  
+- SEbastian Garcia acosta
+- Lina Acosta
+- Cesar Canales
+- Camilo ENriquez
+
+Se pasaron del tiempo
+- Javier TOrres
+- Nelson David QUiñonez
+- Christion GIronza 
 
