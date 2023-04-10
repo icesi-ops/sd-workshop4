@@ -1,4 +1,4 @@
-- hosts: loadbalancer
+- hosts: lb
   become: yes
   tasks:
   - name: Descargar archivo haproxy.tpl
@@ -11,7 +11,7 @@
     replace:
       path: /etc/consul-template/haproxy.tpl
       regexp: 'microservice-a'
-      replace: '{{ inventory_hostname }}'
+      replace: 'node1'
 
   - name: Ejecutar consul-template para actualizar haproxy.cfg
     shell: "consul-template -consul-addr '192.168.56.200:8500' -template '/etc/consul-template/haproxy.tpl:/etc/haproxy.cfg' -once"
