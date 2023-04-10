@@ -1,21 +1,16 @@
 # Workshop4
 
-Integrate microservice app-pay to:
-- Consul
-- Modify LoadBalancer to support path /pay pointing to app-pay microservice 
-- Modify API GW to support redirect to app-pay microservice
+Realizar la integración de Consul con un balanceador de carga para la automatización de la creación de plantillas.
 
-till Martes 22/ 11:59pm 
------------------------------------
+## Entrega Juan Fernando Angulo
 
-Entregaron a tiempo:  
-- SEbastian Garcia acosta
-- Lina Acosta
-- Cesar Canales
-- Camilo ENriquez
+Tenemos un Vagranfile con 4 máquinas, un reverse proxy de nginx, un balanceador de carga y dos servidores web.\n
+El balanceador de carga actuará como el consul-server, mientras que los servidores web serán los consul-agent.
 
-Se pasaron del tiempo
-- Javier TOrres
-- Nelson David QUiñonez
-- Christion GIronza 
 
+
+Para la instalación de Consul dentro de las máquinas se usaron inline shells dentro del Vagrantfile, y para la configuración del onsul-server y los consul-agent se escribieron playbooks separados de Ansible.
+
+
+
+Para correr el workshop solo hay que ejecutar el comando `vagrant up`.
