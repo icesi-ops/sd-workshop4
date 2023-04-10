@@ -1,0 +1,17 @@
+- hosts: loadbalancer
+  become: yes
+  tasks:
+  - name: Descargar archivo haproxy.tpl
+    get_url:
+      url: https://raw.githubusercontent.com/ICESI/ds-discovery-service/master/templates/haproxy.tpl
+      dest: /etc/consul-template/haproxy.tpl
+      mode: '0644'
+
+  - name: Reemplazar nombre del servicio en haproxy.tpl
+    replace:
+      path: /etc/consul-template/haproxy.tpl
+      regexp: 'microservice-a'
+      replace: '{{ inventory_hostname }}'
+
+  - name: Ejecutar consul-template para actualizar haproxy.cfg
+    shell: "consul-template -consul-addr '192.168.56.200:8500' -template '/etc/consul-template/haproxy.tpl:/etc/haproxy.cfg' -once"
