@@ -1,0 +1,73 @@
+- hosts: lb
+  become: yes
+  tasks:
+    - name: Crear usuario consul
+      user:
+        name: consul
+
+    - name: Cambiar contraseña del usuario consul
+      shell: "echo 'consulserver' | passwd --stdin consul"
+
+    - name: Cambiar propietario y grupo de /etc/consul
+      file:
+        path: /etc/consul
+        owner: consul
+        group: consul
+        recurse: yes
+
+    - name: Cambiar propietario y grupo de /etc/consul.d/
+      file:
+        path: /etc/consul.d/
+        owner: consul
+        group: consul
+        recurse: yes
+
+    - name: Iniciar servicio firewalld
+      service:
+        name: firewalld
+        state: started
+
+    - name: Abrir puerto 8301/tcp en el firewall
+      firewalld:
+        port: 8301/tcp
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+    - name: Abrir puerto 8300/tcp en el firewall
+      firewalld:
+        port: 8300/tcp
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+    - name: Abrir puerto 8500/tcp en el firewall
+      firewalld:
+        port: 8500/tcp
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+    - name: Recargar configuración de firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+
+    - name: Crear directorio remoto temporal
+      file:
+        path: /home/consul/.ansible/tmp
+        owner: consul
+        group: consul
+        mode: '0700'
+        state: directory
+
+    - name: Probar que el cambio al usuario consul funciona
+      become_user: consul
+      raw: whoami
+
+    - name: Iniciar servidor de consul
+      become_user: consul
+      shell: consul agent -server -bootstrap-expect=1 -data-dir=/etc/consul/data -node=agent-server -bind=192.168.56.200 -enable-script-checks=true -config-dir=/etc/consul.d -client 0.0.0.0 &
+
+    - name: Mostrar miembros del cluster de Consul
+      shell: consul members
