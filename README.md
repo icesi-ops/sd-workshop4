@@ -48,3 +48,17 @@ Y su playbook está en `playbooks/consul/consul_agent.yml`
 Para correr el workshop solo hay que ejecutar el comando `vagrant up`.
 
 ## Evidencia:
+### Load balancer:
+![image](https://user-images.githubusercontent.com/54970187/231011960-04015544-fdea-4d6e-993a-9a6a707b2926.png)
+
+### Web-1:
+![image](https://user-images.githubusercontent.com/54970187/231012818-b21f6a6f-e419-42b0-a803-575dc19c43fb.png)
+
+### Web-2:
+![image](https://user-images.githubusercontent.com/54970187/231012901-66e5adbd-ba79-47fe-9469-16fb10cfd253.png)
+
+Y al hacer `consul members` en el loadbalancer:
+![image](https://user-images.githubusercontent.com/54970187/231013082-8893e82e-4c2a-4e8b-85b6-2dd97c6ff761.png)
+
+
+
