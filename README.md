@@ -1,21 +1,18 @@
 # Workshop4
 
-Integrate microservice app-pay to:
-- Consul
-- Modify LoadBalancer to support path /pay pointing to app-pay microservice 
-- Modify API GW to support redirect to app-pay microservice
+# STEPS TO ACTIVATE THE SERVICES DISCOVERER (CONSUL)
 
-till Martes 22/ 11:59pm 
------------------------------------
+• First you must install the dnsmasq service that allows you to have a DNS service.
+• Then you must create a file (preferably with the name 10-consul) in the etc/dnsmasq.d directory where you must put the server with the loopback address and port like this
 
-Entregaron a tiempo:  
-- SEbastian Garcia acosta
-- Lina Acosta
-- Cesar Canales
-- Camilo ENriquez
+_Server=/consul/127.0.0.1#8600_
 
-Se pasaron del tiempo
-- Javier TOrres
-- Nelson David QUiñonez
-- Christion GIronza 
+• Then the service must be restarted
+• Finally, the resolv.conf file must be modified to allow DNS to resolve services found on the host machine, as follows
+
+_name server 127.0.0.1_
+
+To confirm that the DNS service is resolving the IP address of each microservice, use the command dig <service name>.service.consul (in the terminal), and on the screen enter the local address localhost:8500 through the browser
+
+If you want to see photos about the result, click here and download the file  https://github.com/luis486/sd-workshop4/tree/main/evidences
 
