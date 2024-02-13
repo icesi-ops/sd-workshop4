@@ -14,4 +14,5 @@ _name server 127.0.0.1_
 
 To confirm that the DNS service is resolving the IP address of each microservice, use the command dig <service name>.service.consul (in the terminal), and on the screen enter the local address localhost:8500 through the browser
 
+If you want to see photos about the result, click here and download the file  https://github.com/luis486/sd-workshop4/tree/main/evidences
 
