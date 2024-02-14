@@ -1,21 +1,18 @@
-# Workshop4
+# Workshop 4
 
-Integrate microservice app-pay to:
-- Consul
-- Modify LoadBalancer to support path /pay pointing to app-pay microservice 
-- Modify API GW to support redirect to app-pay microservice
+In this micro-workshop, the `consul` service was enabled, and the `dns` service was configured with `dnsmasq` to obtain a reverse DNS that resolves the domains of the microservices registered on the consul server.
 
-till Martes 22/ 11:59pm 
------------------------------------
+## Microservices registered in Consul
+![alt text](/images/image_consul.png)
 
-Entregaron a tiempo:  
-- SEbastian Garcia acosta
-- Lina Acosta
-- Cesar Canales
-- Camilo ENriquez
+## Active and functioning DNS with dnsmasq
+![alt text](/images/image_dnsmasq.png)
 
-Se pasaron del tiempo
-- Javier TOrres
-- Nelson David QUiñonez
-- Christion GIronza 
+## Active and functioning DNS with dnsmasq
+The command `dig` resolves the DNS of each of the services.
 
+`App-Config and App-Invoice`
+![alt text](/images/image_dns_resolve1.png)
+
+`App-Pay and App-Transaction`
+![alt text](/images/image_dns_resolve2.png)
