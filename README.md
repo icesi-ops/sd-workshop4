@@ -1,21 +1,12 @@
-# Workshop4
+# Workshop - 4
 
-Integrate microservice app-pay to:
-- Consul
-- Modify LoadBalancer to support path /pay pointing to app-pay microservice 
-- Modify API GW to support redirect to app-pay microservice
+_In this repository, you will find the configurations of images, containers, and other necessary components to initialize various microservices, namely app-config and app-invoice._
 
-till Martes 22/ 11:59pm 
------------------------------------
 
-Entregaron a tiempo:  
-- SEbastian Garcia acosta
-- Lina Acosta
-- Cesar Canales
-- Camilo ENriquez
+## Documentation
 
-Se pasaron del tiempo
-- Javier TOrres
-- Nelson David QUiñonez
-- Christion GIronza 
+[Click here for the documentation pdf](https://github.com/DanielRamirez1901/sd-workshop4/blob/main/Workshop%204%20-%20Daniel%20Ramirez%20Gomez.pdf)
 
+## Authors
+
+* Daniel Ramirez Gomez. [GitHub profile.](https://github.com/DanielRamirez1901 "GitHub profile.")
