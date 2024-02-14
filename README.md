@@ -1,21 +1,25 @@
-# Workshop4
+# Microservicios con Spring Boot
 
-Integrate microservice app-pay to:
-- Consul
-- Modify LoadBalancer to support path /pay pointing to app-pay microservice 
-- Modify API GW to support redirect to app-pay microservice
+![Architecture](./resources/microservicesarchitecture.png)
 
-till Martes 22/ 11:59pm 
------------------------------------
+## Información de los microservicios
+El microservicio de invoices, debe listar las facturas de clientes y además debe consumir una cola para cambiar el estado de la factura cuando esta se paga a través del microservicio de pago.
+El microservicio de pago debe registrar el pago en su respectiva bd y además debe dejar un mensaje en una cola para actualizar la factura en el microservicio de facturas y además debe dejar un mensaje en una cola para registrar el movimiento en el microservicio de transacciones.
+El microservicio de transacciones debe listar las transacciones de una factura, además debe consumir una cola para obtener las transacciones de pago del microservicio de pago.
+Todos los microservicios deben consumir la cadena de conexión desde el servicio de configuración centralizada.
 
-Entregaron a tiempo:  
-- SEbastian Garcia acosta
-- Lina Acosta
-- Cesar Canales
-- Camilo ENriquez
+La información de los endpoints disponibles por microservicio se incluyen en el documento de INFO.md
+## Scripts de creación de bases de datos
 
-Se pasaron del tiempo
-- Javier TOrres
-- Nelson David QUiñonez
-- Christion GIronza 
+La informacion de como crear las bases de datos y sus respectivas tablas se incluyen en google.com
 
+## Tecnologías utilizadas
+
+- Spring Boot (Java Framework JDK v11+)
+- Gradle (Gestor de dependencias)
+- Postman (Test de endpoints/servicios rest)
+- Postgresql (Base de Datos)
+- MySQL (Base de Datos)
+- MongoDB (Base de Datos NoSQL)
+- Kafka (Gestor de Mensajería)
+- Github (Repositorio para proyecto y Configuraciones de micorservicios)
