@@ -116,6 +116,9 @@ chmod +x deploy.sh
 
 ## 5. Invoice refactor processTransactionEvent
 ![img_2.png](assets/img_2.png)
+
+## 6. Consul UI
+![img3.png](assets/img3.png)
   
     
 
