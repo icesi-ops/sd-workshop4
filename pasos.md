@@ -54,3 +54,25 @@ INSERT INTO invoice(id_invoice, amount, state) VALUES(2, 5000, 1);
 INSERT INTO invoice(id_invoice, amount, state) VALUES(3, 300, 0);
 INSERT INTO invoice(id_invoice, amount, state) VALUES(4, 600, 0);
 INSERT INTO invoice(id_invoice, amount, state) VALUES(5, 400, 0);
+
+### DNS Masq (Mac OS version)
+brew update
+brew install dnsmasq
+sudo mkdir -pv $(brew --prefix)/etc/
+echo -e "\n\nUpdating /usr/local/etc/dnsmasq.conf-------------------------------"
+echo "server=/consul/127.0.0.1#8600" >> $(brew --prefix)/etc/dnsmasq.conf
+
+# Restart dnsmasq service
+echo -e "\n\nRestarting dnsmasq service------------------------------"
+sudo brew services restart dnsmasq
+sudo killall -HUP mDNSResponder
+
+# Create a dns resolver for consul
+sudo mkdir -v /etc/resolver/
+cat <<EOF | sudo tee /etc/resolver/consul
+nameserver 127.0.0.1#8600
+EOF
+
+# Check dnsmasq service status
+echo -e "\n\nChecking dnsmasq service status------------------------------"
+sudo brew services list | grep dnsmasq
