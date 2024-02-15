@@ -1,21 +1,44 @@
-# Workshop4
 
-Integrate microservice app-pay to:
-- Consul
-- Modify LoadBalancer to support path /pay pointing to app-pay microservice 
-- Modify API GW to support redirect to app-pay microservice
+# <b> *Workshop 4* </b>
 
-till Martes 22/ 11:59pm 
------------------------------------
 
-Entregaron a tiempo:  
-- SEbastian Garcia acosta
-- Lina Acosta
-- Cesar Canales
-- Camilo ENriquez
 
-Se pasaron del tiempo
-- Javier TOrres
-- Nelson David QUiñonez
-- Christion GIronza 
+## <b> STEPS </b> 📄
+
+- *git clone* https://github.com/icesi-ops/training_microservices.git
+
+- sudo su
+
+- systemctl stop systemd-resolved
+
+- systemctl disable systemd-resolved
+
+- cd /
+
+- sudo vim /etc/resolv.conf
+
+- edit file with nameserver=127.0.0.1
+
+- cd dnsmasq.d
+
+- sudo vim 10-consul
+
+-  edit with server=/consul/127.0.0.1#8600
+
+- sudo systemctl restart dnsmasq
+
+- dig app-config.service.consul
+
+- dig app-invoice.service.consul
+
+- dig app-pay.service.consul
+
+- dig app-transaction.service.consul
+
+
+
+
+
+
+<br>
 
