@@ -76,3 +76,41 @@ EOF
 # Check dnsmasq service status
 echo -e "\n\nChecking dnsmasq service status------------------------------"
 sudo brew services list | grep dnsmasq
+
+### LOAD BALANCER 
+
+#in Haproxy folder
+docker build --platform=linux/amd64 -t estebanm1812/load-balancer .
+docker run -d -p 1936:1936 -p 9000:80 --network distribuidos --name load-balancer estebanm1812/load-balancer
+### Up Express-gateway database
+docker run --network distribuidos -d --name express-gateway-data-store \
+-p 6379:6379 \
+redis:alpine
+### Up Express-gateway service in folder appwg
+docker run -d --name express-gateway \
+--network distribuidos \
+-v .:/var/lib/eg \
+-p 8080:8080 \
+-p 9876:9876 \
+express-gateway
+### Create User for express-gateway
+docker exec -it express-gateway sh
+eg users create
+
+#
+#"isActive": true,
+#"username": "esteban",
+#"id": "d83631ae-c2ae-4a92-929b-893994935813",
+#"firstname": "esteban",
+#"lastname": "mendoza",
+#"email": "EstebanMendoza02@hotmail.com",
+#"createdAt": "Tue Feb 27 2024 00:39:24 GMT+0000 (Coordinated Universal Time)",
+#"updatedAt": "Tue Feb 27 2024 00:39:24 GMT+0000 (Coordinated Universal Time)"
+#}
+
+eg credentials create -c esteban -t key-auth -q
+
+### Key 2BEBKwq2rmpUlMeSuaaQlE:1OVA4GdIuLNW4qMUfzasKE
+
+##Test
+curl -H "Authorization: apiKey 2BEBKwq2rmpUlMeSuaaQlE:1OVA4GdIuLNW4qMUfzasKE" http://localhost:8080/config/app-pay/dev
