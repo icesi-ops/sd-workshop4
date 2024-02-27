@@ -119,6 +119,15 @@ chmod +x deploy.sh
 
 ## 6. Consul UI
 ![img3.png](assets/img3.png)
+
+## 7. Load Balancer
+![img_1.png](assets/load.png)
+
+## 8. Api Gateway
+![img.png](assets/apig-console.png)
+
+## 9. Docker
+![img.png](assets/docker.png)
   
     
 
